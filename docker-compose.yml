@@ -1,0 +1,31 @@
+version: '2'
+services:
+  mongodata:
+    build: ./mongodb
+    volumes:
+        - /data/db
+    command: --break-mongo
+  mongodb:
+    build: ./mongodb
+    volumes_from:
+        - mongodata
+    ports:
+        - "27017:27017"
+    #command: --smallfiles --rest --auth
+    command: --smallfiles --rest
+  mongoexpress:
+    build: ./mongo-express-docker
+    links: 
+        - mongodb
+    ports:
+        - "8081:8081"
+    environment:
+        ME_CONFIG_MONGODB_SERVER: "mongodb"
+  nodejs:
+    build: ./nodejs
+    volumes:
+        - "./src:/src"
+    links:
+        - mongodb
+    ports:
+        - "7777:7777"
