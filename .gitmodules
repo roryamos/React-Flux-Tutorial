@@ -1,0 +1,3 @@
+[submodule "mongo-express-docker"]
+	path = mongo-express-docker
+	url = https://github.com/mongo-express/mongo-express-docker.git
