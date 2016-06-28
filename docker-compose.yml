@@ -29,3 +29,4 @@ services:
         - mongodb
     ports:
         - "7777:7777"
+        - "35729:35729"
